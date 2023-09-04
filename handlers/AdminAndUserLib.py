@@ -30,9 +30,9 @@ def ShowDocuments(query: types.CallbackQuery):
     if query.data == Calls.UserLibrary:
         db = database.DB(path=config.UserDatabase)
         FolderID = db.Get(key=str(query.message.chat.id))[-2]
-    elif query.data == Calls.ShowDiary:
+    elif query.data == Calls.Diary:
         DiaryDB = database.DB(path=config.DiaryDatabase)
-        FolderID = DiaryDB.Get(key=str(user))[-2]
+        FolderID = '1j8AdatUICPl8Tgqgiworixr0_FaIsLHR'
     else:
         FolderID = config.methods_folder
     folder = drive.GetFromFolder(FolderID)
@@ -131,5 +131,5 @@ def handler():
         callback=ShowDocuments, 
         func=lambda query: query.data == Calls.SearchAdmin or query.data == Calls.UserLibrary or query.data == Calls.ShowDiary
     )
-    bot.register_callback_query_handler(callback=Diary, func=lambda query: query.data == Calls.Diary)
+    bot.register_callback_query_handler(callback=ShowDocuments, func=lambda query: query.data == Calls.Diary)
     bot.register_callback_query_handler(callback=DeleteUser, func=lambda query: query.data == 'EditCampList')
