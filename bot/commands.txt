@@ -1,0 +1,3 @@
+open directory: cd bot
+load env: source env/bin/activate
+run bot: python3 -B main.py
