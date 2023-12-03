@@ -10,7 +10,6 @@ class GDrive:
         self.credentials = credentials
         self.scope = scope
         self.Auth()
-        print('Module is working!\n')
     
     
     def Auth(self):
@@ -24,6 +23,8 @@ class GDrive:
         gauth.credentials = ServiceAccountCredentials.from_json_keyfile_name(self.credentials, self.scope)
         gauth.Authorize()
         self.drive = GoogleDrive(auth=gauth)
+        print('Authentification success!')
+        return self.drive
 
 
     def CreateFolder(self, title: str, parent_folder_id: str):
@@ -108,6 +109,8 @@ class GDrive:
         
         file = self.drive.CreateFile({'id': FileID})
         file_path = f'{folder_path}/{title}'
-        print(file_path)
         file.GetContentFile(file_path)
         return file_path
+
+async def conn_google_drive(credentials: str, scope: str):
+    return GDrive(credentials, scope)

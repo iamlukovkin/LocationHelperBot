@@ -1,5 +1,7 @@
+from typing import Any
 from sqlalchemy import Boolean
 from sqlalchemy import BigInteger
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase
 
 from sqlalchemy.ext.asyncio import AsyncAttrs, async_sessionmaker, create_async_engine
@@ -20,7 +22,8 @@ class User(Base):
     telegram_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
     username: Mapped[str] = mapped_column(String)
     fullname: Mapped[str] = mapped_column(String)
-    google_folder_id: Mapped[str] = mapped_column(String)
+    google_folder_id: Mapped[str] = mapped_column(String, nullable=True)
+    is_admin: Mapped[bool] = mapped_column(Boolean, default=False)
     
     def __repr__(self):
         return f'<User(telegram_id={self.telegram_id}, username={self.username}, fullname={self.fullname}, google_folder_id={self.google_folder_id})>'
@@ -45,6 +48,25 @@ class User(Base):
         self.username = username
         self.fullname = fullname
         self.google_folder_id = google_folder_id
+        self.is_admin = False
+
+
+class File(Base):
+    __tablename__ = 'files'
+
+    filename: Mapped[str] = mapped_column(String)
+    file_id: Mapped[str] = mapped_column(String, primary_key=True)
+    parent_folder_id: Mapped[str] = mapped_column(String)
+    
+    telegram_id: Mapped[int] = mapped_column(BigInteger, nullable=True)
+    
+    def __init__(self, file_id: str, filename: str, parent_folder_id: str, telegram_id: int = None):
+        self.filename = filename
+        self.file_id = file_id
+        self.parent_folder_id = parent_folder_id
+        self.telegram_id = telegram_id
+
+
 
 
 async def conn_to_db():

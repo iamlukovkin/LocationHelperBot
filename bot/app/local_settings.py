@@ -1,10 +1,4 @@
-def read_settings():
-    print('Loading settings...')
-    import json
-    with open('settings.json', 'r') as f:
-        settings = json.load(f)
-    print('Settings loaded!')
-    return settings
+from .modules.read_files import read_settings
 
 
 settings = read_settings()

@@ -2,7 +2,7 @@ from aiogram.filters import Command
 from aiogram import types
 
 from .. import assets
-from ..database.requests import get_user, add_user
+from ..database.requests import get_user
 
 from ..bot_app import dp
 

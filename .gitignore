@@ -2,3 +2,4 @@ docx
 env
 bot/data
 bot/settings.json
+bot/temp

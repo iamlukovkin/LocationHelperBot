@@ -17,9 +17,15 @@ class MyFilter(Filter):
 
 @dp.message(MyFilter(assets.reply_keyboards.hello_button.text))
 async def cmd_hello(message: types.Message):
-    from app.assets.inline_keyboards import menu_buttons
-    keyboard = types.InlineKeyboardMarkup(
-        inline_keyboard=menu_buttons
+    await message.answer(
+        text="Добро пожаловать!",
+        reply_markup=types.ReplyKeyboardRemove()
     )
-    await message.answer(text=assets.message_text.start_message, reply_markup=keyboard)
+    keyboard = types.InlineKeyboardMarkup(
+        inline_keyboard=assets.inline_keyboards.menu_buttons
+    )
+    await message.answer(
+        text=assets.message_text.menu_message, 
+        reply_markup=keyboard
+    )
 
