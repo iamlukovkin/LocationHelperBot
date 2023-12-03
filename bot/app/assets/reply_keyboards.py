@@ -5,14 +5,9 @@ from aiogram.types import KeyboardButton
 
 
 hello_button = KeyboardButton(text='Начнём! 📍')
-# site = KeyboardButton(
-#     text='Перейти в WebApp', 
-#     web_app=WebAppInfo(url='https://iamlukovkin.github.io/Practica/')
-# )
+menu_button = KeyboardButton(text='Главное меню 📍')
 
-# menu_buttons = [
-#     [site], 
-#     [rsreu_site], 
-#     [cdo_site, edu_site], 
-#     [back_button]
-# ]
+register_button = KeyboardButton(
+    text='Зарегистрироваться📝', 
+    web_app=WebAppInfo(url='https://iamlukovkin.github.io/LocationHelperBot/site/webapp/registration.html')
+)

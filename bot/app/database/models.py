@@ -67,6 +67,21 @@ class File(Base):
         self.telegram_id = telegram_id
 
 
+class Profile(Base):
+    __tablename__ = 'profiles'
+
+    telegram_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    profile_name: Mapped[str] = mapped_column(String)
+    job_title: Mapped[str] = mapped_column(String)
+    bio: Mapped[str] = mapped_column(String)
+    google_folder_id: Mapped[str] = mapped_column(String, nullable=True)
+    
+    
+    def __init__(self, telegram_id: int, profile_name: str, job_title: str, bio: str):
+        self.telegram_id = telegram_id
+        self.profile_name = profile_name
+        self.job_title = job_title
+        self.bio = bio
 
 
 async def conn_to_db():

@@ -1,9 +1,10 @@
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
-from .models import User
 from .models import async_session
+from .models import User
 from .models import File
+from .models import Profile
 
 
 async def get_user(telegram_id: int, username: str, full_name: str) -> User:
@@ -72,3 +73,11 @@ async def get_file(file_id):
         result = await session.execute(select(File).where(File.file_id == file_id))
         file = result.scalar()
         return file
+
+
+# get profile from database by telegram_id
+async def get_profile(telegram_id):
+    async with async_session() as session:
+        result = await session.execute(select(Profile).where(Profile.telegram_id == telegram_id))
+        profile = result.scalar()
+        return profile

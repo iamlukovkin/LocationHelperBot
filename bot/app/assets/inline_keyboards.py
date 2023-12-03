@@ -16,9 +16,3 @@ library_button = InlineKeyboardButton(text='📔', callback_data='library')
 upload_button = InlineKeyboardButton(text='📄', callback_data='upload')
 main_button = InlineKeyboardButton(text='📍', callback_data='main')
 methods_buttons = [[new_document_button, library_button, upload_button, main_button]]
-
-
-# rsreu_site_button = InlineKeyboardButton(text='Сайт РГРТУ', url='http://rsreu.ru/')
-# cdo_site_button = InlineKeyboardButton(text='Сайт CDO', url='http://cdo.rsreu.ru/')
-# edu_site_button = InlineKeyboardButton(text='Сайт EDU', url='http://edu.rsreu.ru/')
-# menu_button = InlineKeyboardButton(text='В главное меню', callback_data='goto_menu')

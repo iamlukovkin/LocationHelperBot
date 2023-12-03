@@ -126,3 +126,18 @@ async def cmd_document(callback_query: types.CallbackQuery):
     
     import os
     os.remove(file_path)
+    
+    
+@dp.callback_query(MyFilter(assets.inline_keyboards.profile_button.callback_data))
+async def cmd_profile(callback_query: types.CallbackQuery):
+    from ..database.requests import get_profile
+    profile = await get_profile(callback_query.from_user.id)
+    if profile is None:
+        await callback_query.message.answer(
+            text=assets.message_text.must_register_message,
+            reply_markup=types.ReplyKeyboardMarkup(
+                keyboard=[[assets.reply_keyboards.register_button], [assets.reply_keyboards.menu_button]], 
+                resize_keyboard=True)
+        )
+    
+    await callback_query.answer()

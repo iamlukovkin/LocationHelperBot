@@ -109,7 +109,7 @@ form {
 }
 
 textarea {
-	font-family: Mont-Bold;
+	font-family: Mont-Regular;
 	font-size: calc(var(--index) * 1.2);
 	font-style: normal;
 	font-weight: 600;
@@ -147,7 +147,7 @@ button {
 	color: var(--white-white-100, #f3f3f3);
 	text-align: center;
 
-	font-family: Mont-Bold;
+	font-family: Mont-Regular;
 	font-size: calc(var(--index) * 1.2);
 	font-style: normal;
 	font-weight: 600;
@@ -173,10 +173,43 @@ button:hover {
 
 #error {
 	display: none;
-	font-family: Mont-Bold;
+	font-family: Mont-Regular;
 	font-size: calc(var(--index) * 1.2);
 	font-style: normal;
 	font-weight: 600;
 	line-height: normal;
 	color: #46f594;
+}
+
+select {
+	color: var(--white-white-100, #f3f3f3);
+	text-align: center;
+
+	font-family: Mont-Regular;
+	font-size: calc(var(--index) * 1.2);
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+
+	display: flex;
+	padding: calc(var(--index) * 0.8) calc(var(--index) * 0.2);
+	justify-content: center;
+	text-align: left;
+	align-items: center;
+	gap: calc(var(--index) * 1.2);
+	flex: 1 0 0;
+	align-self: stretch;
+
+	border: 1px solid rgba(243, 243, 243, 0.4);
+	border-radius: 8px;
+	background-color: transparent;
+}
+
+select:hover {
+	cursor: pointer;
+	background-color: var(--black-black-500);
+}
+
+select:focus {
+	outline: none;
 }
