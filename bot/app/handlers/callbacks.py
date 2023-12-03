@@ -139,5 +139,19 @@ async def cmd_profile(callback_query: types.CallbackQuery):
                 keyboard=[[assets.reply_keyboards.register_button], [assets.reply_keyboards.menu_button]], 
                 resize_keyboard=True)
         )
-    
+    else:
+        await callback_query.message.answer(
+            text=assets.message_text.profile_message.format(
+                profile_name=profile.profile_name,
+                job_title=profile.job_title,
+                bio=profile.bio
+            ),
+            reply_markup=types.ReplyKeyboardMarkup(
+                keyboard=[
+                    [assets.reply_keyboards.menu_button],
+                    [assets.reply_keyboards.edit_profile_button]
+                ],
+            )
+        )
+        await callback_query.answer()
     await callback_query.answer()

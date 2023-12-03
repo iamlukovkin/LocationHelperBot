@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Локация.Регистрация</title>
+		<link rel="stylesheet" type="text/css" href="../style.css" />
+	</head>
+	<body>
+		<div class="content">
+			<div class="header">
+				<h1>Регистрация</h1>
+			</div>
+			<form>
+				<div class="question">
+					<h2>Введите полностью ваши фамилию, имя и отчество</h2>
+					<textarea
+						id="form_1"
+						placeholder="Оставьте свой ответ здесь..."
+					></textarea>
+				</div>
+				<div class="question">
+					<h2>Выберите свою должность</h2>
+					<select id="form_2">
+						<option>Руководитель</option>
+						<option>Заместитель руководителя</option>
+						<option>Методист</option>
+						<option>Старший вожатый</option>
+						<option>Вожатый</option>
+						<option>Стажёр</option>
+					</select>
+				</div>
+				<div class="question">
+					<h2>Напишите информацию о себе</h2>
+					<textarea
+						id="form_3"
+						placeholder="Оставьте свой ответ здесь..."
+					></textarea>
+				</div>
+				<div id="error"></div>
+			</form>
+			<div class="Low_buttons">
+				<button id="submit">Отправить</button>
+				<button id="back">Назад</button>
+			</div>
+		</div>
+		<script>
+			for (let i = 1; i < 10 + 1; i++) {
+				document.getElementById('form_' + i).addEventListener('keyup', (e) => {
+					document.getElementById('form_' + i).style.height = 'auto'
+					let scHeight = e.target.scrollHeight
+					document.getElementById('form_' + i).style.height = `${scHeight}px`
+				})
+			}
+		</script>
+		<script src="https://telegram.org/js/telegram-web-app.js"></script>
+		<script>
+			let tg = window.Telegram.WebApp
+			let send = document.getElementById('submit')
+			let back = document.getElementById('back')
+			tg.expand()
+
+			send.addEventListener('click', () => {
+				let form_1 = document.getElementById('form_1').value
+				let form_2 = document.getElementById('form_2').value
+				let form_3 = document.getElementById('form_3').value
+				if (form_1 === '' || form_3 === '') {
+					document.getElementById('error').innerText = 'Заполните все поля'
+					document.getElementById('error').style.display = 'block'
+					const element = document.getElementById('error')
+					let opacity = 1
+					const interval = 50
+					const duration = 1000
+
+					function fadeOut() {
+						opacity -= interval / duration
+						element.style.opacity = opacity
+
+						if (opacity <= 0) {
+							clearTimeout(timer)
+							document.getElementById('error').style.display = 'none'
+						} else {
+							timer = setTimeout(fadeOut, interval)
+						}
+					}
+
+					let timer = setTimeout(fadeOut, interval)
+					return
+				}
+
+				let data = {
+					action: 'edit_profile',
+					question_1: form_1,
+					question_2: form_2,
+					question_3: form_3,
+				}
+				tg.sendData(JSON.stringify(data))
+				tg.close()
+			})
+		</script>
+	</body>
+</html>

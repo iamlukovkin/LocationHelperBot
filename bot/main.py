@@ -12,7 +12,14 @@ if __name__ == "__main__":
     try:
         logging.basicConfig(level=logging.INFO, stream=sys.stdout)
         asyncio.run(conn_to_db())
-        asyncio.run(refresh_db())
+        while True:
+            ans = input("Do you want to refresh database? (y/n) ")
+            if ans == 'y':
+                asyncio.run(refresh_db())
+            elif ans == 'n':
+                break
+            else:
+                print("Wrong answer")
         asyncio.run(launch_bot())
     except KeyboardInterrupt:
         print("Exit")

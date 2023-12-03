@@ -77,11 +77,12 @@ class Profile(Base):
     google_folder_id: Mapped[str] = mapped_column(String, nullable=True)
     
     
-    def __init__(self, telegram_id: int, profile_name: str, job_title: str, bio: str):
+    def __init__(self, telegram_id: int, profile_name: str, job_title: str, bio: str, google_folder_id: str = None):
         self.telegram_id = telegram_id
         self.profile_name = profile_name
         self.job_title = job_title
         self.bio = bio
+        self.google_folder_id = google_folder_id
 
 
 async def conn_to_db():

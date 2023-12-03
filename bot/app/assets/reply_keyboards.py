@@ -8,6 +8,11 @@ hello_button = KeyboardButton(text='Начнём! 📍')
 menu_button = KeyboardButton(text='Главное меню 📍')
 
 register_button = KeyboardButton(
-    text='Зарегистрироваться📝', 
+    text='Зарегистрироваться 📝', 
     web_app=WebAppInfo(url='https://iamlukovkin.github.io/LocationHelperBot/site/webapp/registration.html')
+)
+
+edit_profile_button = KeyboardButton(
+    text='Изменить профиль 📝', 
+    web_app=WebAppInfo(url='https://iamlukovkin.github.io/LocationHelperBot/site/webapp/edit_profile.html')
 )

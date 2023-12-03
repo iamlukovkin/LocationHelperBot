@@ -81,3 +81,22 @@ async def get_profile(telegram_id):
         result = await session.execute(select(Profile).where(Profile.telegram_id == telegram_id))
         profile = result.scalar()
         return profile
+
+
+async def add_profile(telegram_id: int, profile_name: str, job_title: str, bio: str, google_folder_id: str = None):
+    async with async_session() as session:
+        profile = Profile(
+            telegram_id=telegram_id, 
+            profile_name=profile_name, 
+            job_title=job_title, 
+            bio=bio, 
+            google_folder_id=google_folder_id
+        )
+        session.add(profile)
+        await session.commit()
+
+
+async def delete_profile(telegram_id):
+    async with async_session() as session:
+        await session.execute(Profile.__table__.delete().where(Profile.telegram_id == telegram_id))
+        await session.commit()

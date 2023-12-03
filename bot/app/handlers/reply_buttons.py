@@ -29,3 +29,18 @@ async def cmd_hello(message: types.Message):
         reply_markup=keyboard
     )
 
+
+@dp.message(MyFilter(assets.reply_keyboards.menu_button.text))
+async def cmd_hello(message: types.Message):
+    await message.answer(
+        text="Переходим в меню...", 
+        reply_markup=types.ReplyKeyboardRemove()
+    )
+    keyboard = types.InlineKeyboardMarkup(
+        inline_keyboard=assets.inline_keyboards.menu_buttons
+    )
+    await message.answer(
+        text=assets.message_text.menu_message, 
+        reply_markup=keyboard
+    )
+
