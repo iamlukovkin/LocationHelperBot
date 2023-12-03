@@ -16,6 +16,7 @@ if __name__ == "__main__":
             ans = input("Do you want to refresh database? (y/n) ")
             if ans == 'y':
                 asyncio.run(refresh_db())
+                break
             elif ans == 'n':
                 break
             else:

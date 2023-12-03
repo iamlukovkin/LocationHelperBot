@@ -16,3 +16,4 @@ library_button = InlineKeyboardButton(text='📔', callback_data='library')
 upload_button = InlineKeyboardButton(text='📄', callback_data='upload')
 main_button = InlineKeyboardButton(text='📍', callback_data='main')
 methods_buttons = [[new_document_button, library_button, upload_button, main_button]]
+delete_button = InlineKeyboardButton(text='🗑', callback_data='delete')

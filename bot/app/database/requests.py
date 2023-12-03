@@ -61,19 +61,43 @@ async def get_files_from_methods():
         return files
     
     
-async def get_files():
+async def get_files(telegram_id: int = None):
     async with async_session() as session:
-        result = await session.execute(select(File))
+        if not telegram_id:
+            # get all rows
+            result = await session.execute(select(File))
+        else:
+            result = await session.execute(select(File).where(File.telegram_id == telegram_id))
         files = result.scalars().all()
         return files
 
 
-async def get_file(file_id):
+async def get_file(file_id, telegram_id: int = None):
     async with async_session() as session:
-        result = await session.execute(select(File).where(File.file_id == file_id))
+        if not telegram_id:
+            result = await session.execute(select(File).where(File.file_id == file_id))
+        else:
+            result = await session.execute(select(File).where(File.file_id == file_id, File.telegram_id == telegram_id))
         file = result.scalar()
         return file
+    
 
+async def add_file(file_id: str, filename: str, parent_folder_id: str, telegram_id: int = None):
+    async with async_session() as session:
+        file = File(
+            filename=filename, 
+            file_id=file_id, 
+            parent_folder_id=parent_folder_id, 
+            telegram_id=telegram_id
+        )
+        session.add(file)
+        await session.commit()
+
+
+async def delete_file(file_id, telegram_id):
+    async with async_session() as session:
+        await session.execute(File.__table__.delete().where(File.file_id == file_id, File.telegram_id == telegram_id))
+        await session.commit()
 
 # get profile from database by telegram_id
 async def get_profile(telegram_id):

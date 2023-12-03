@@ -22,32 +22,12 @@ class User(Base):
     telegram_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
     username: Mapped[str] = mapped_column(String)
     fullname: Mapped[str] = mapped_column(String)
-    google_folder_id: Mapped[str] = mapped_column(String, nullable=True)
     is_admin: Mapped[bool] = mapped_column(Boolean, default=False)
     
-    def __repr__(self):
-        return f'<User(telegram_id={self.telegram_id}, username={self.username}, fullname={self.fullname}, google_folder_id={self.google_folder_id})>'
-    
-    def __str__(self):
-        return f'<User(telegram_id={self.telegram_id}, username={self.username}, fullname={self.fullname}, google_folder_id={self.google_folder_id})>'
-    
-    def __hash__(self):
-        return self.telegram_id
-    
-    def __eq__(self, other):
-        return self.telegram_id == other
-    
-    def __lt__(self, other):
-        return self.telegram_id < other
-    
-    def __gt__(self, other):
-        return self.telegram_id > other
-    
-    def __init__(self, telegram_id: int, username: str = None, fullname: str = None, google_folder_id: str = None):
+    def __init__(self, telegram_id: int, username: str = None, fullname: str = None):
         self.telegram_id = telegram_id
         self.username = username
         self.fullname = fullname
-        self.google_folder_id = google_folder_id
         self.is_admin = False
 
 
