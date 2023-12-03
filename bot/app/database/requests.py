@@ -100,3 +100,13 @@ async def delete_profile(telegram_id):
     async with async_session() as session:
         await session.execute(Profile.__table__.delete().where(Profile.telegram_id == telegram_id))
         await session.commit()
+        
+
+async def edit_profile(telegram_id: int, profile_name: str, job_title: str, bio: str):
+    async with async_session() as session:
+        await session.execute(
+            Profile.__table__.update()
+            .where(Profile.telegram_id == telegram_id)
+            .values(profile_name=profile_name, job_title=job_title, bio=bio)
+        )
+        await session.commit()

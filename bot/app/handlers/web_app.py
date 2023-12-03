@@ -67,17 +67,21 @@ async def document_request(message: types.Message):
     job_title = data['question_2']
     bio = data['question_3']
     
-    from ..database.requests import get_profile, add_profile, delete_profile
-    profile = await get_profile(message.from_user.id)
-    fodler_id = profile.google_folder_id
-    delete_profile(message.from_user.id)
-    await add_profile(
+    from ..database.requests import edit_profile
+    await edit_profile(
         telegram_id=message.from_user.id,
         profile_name=profile_name,
         job_title=job_title,
-        bio=bio,
-        google_folder_id=fodler_id
+        bio=bio
     )
-    from .callbacks import cmd_profile
-    await cmd_profile(message)
-    
+    await message.answer(
+        text=assets.message_text.success_edit_profile_message,   
+        reply_markup=types.InlineKeyboardMarkup(
+            inline_keyboard=[
+                [
+                    assets.inline_keyboards.main_button,
+                    assets.inline_keyboards.profile_button
+                ]
+            ]
+        )
+    )
