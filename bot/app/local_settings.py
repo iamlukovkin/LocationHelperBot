@@ -1,11 +1,18 @@
-# Google Drive
-credentials = 'config/credentials.json'
-scope = ["https://www.googleapis.com/auth/drive"]
-methods_folder = '1gXDbDUoYDfI6cFhwbIrq35SpOZCyYhxm'
-PD_folder = '1GKxxMDjrkuO40Xlt97oKdoEZa9ErFdGW'
-users_folder_id = '1s_nzGkAUE4_vVZEbrgAcom1pzd1CtVoc'
+def read_settings():
+    print('Loading settings...')
+    import json
+    with open('settings.json', 'r') as f:
+        settings = json.load(f)
+    print('Settings loaded!')
+    return settings
 
-# Telegram bot
-API_TOKEN = '6048732407:AAEGRA6prdW1ymtjLamIvn53_vDh_IyQ5yE'
-SQL_ALCHEMY_URL = "sqlite+aiosqlite:///db.sqlite3"
 
+settings = read_settings()
+credentials = settings['credentials']
+scope = settings['scope']
+methods_folder = settings['methods_folder']
+PD_folder = settings['PD_folder']
+users_folder_id = settings['users_folder_id']
+
+API_TOKEN = settings['API_TOKEN']
+SQL_ALCHEMY_URL = settings['SQL_ALCHEMY_URL']
